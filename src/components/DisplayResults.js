@@ -11,21 +11,23 @@ const DisplayResults = props => {
 				<div className="col s10 m10">
 					<div className="card">
 						<div className="card-image">
-							<img src={el.data.url} alt=" " />
+							<img src={el.data.url} alt="" />
 						</div>
 						<span className="card-title">{el.data.title}</span>
 
 						<div className="card-content">
 							<div className="display-override">
-						<span>Date Created: {props.timeConverter(el.data.created)}</span>
+								<span>
+									Date Created: {props.timeConverter(el.data.created)}
+								</span>
 
-							<span>Subreddit: {el.data.subreddit_name_prefixed}</span>
+								<span>Subreddit: {el.data.subreddit_name_prefixed}</span>
 
-							<span>Score: {el.data.score}</span>
+								<span>Score: {el.data.score}</span>
 
-							<span>Ups: {el.data.ups}</span>
+								<span>Ups: {el.data.ups}</span>
 
-							<span>Comments: {el.data.num_comments}</span>
+								<span>Comments: {el.data.num_comments}</span>
 							</div>
 						</div>
 					</div>

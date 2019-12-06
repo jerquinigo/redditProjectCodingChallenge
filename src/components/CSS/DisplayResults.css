@@ -1,9 +1,3 @@
-/* .display-override{
-    display: flex !important;
-    justify-content: center !important;
-    flex-direction: column !important;
-    text-align: start !important;
-} */
 
 .display-override{
     display: flex !important;
