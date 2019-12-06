@@ -22,6 +22,22 @@ class MainParent extends Component {
 
 	componentDidMount() {
 		this.getAllReddit();
+		// $(document).ready(function() {
+		// 	debugger
+		// 	$('select').formSelect();
+		// });
+		 //var elems = document.querySelectorAll('select');
+		 // var options = document.querySelectorAll('option');
+		// var radio = document.querySelectorAll('input')
+
+		// var instances = M.FormSelect.init(elems, options); 
+		// var elems = document.getElementsByTagName("select");
+		// var instances = M.select.init(elems);
+		//M.AutoInit()
+		//var elems = document.querySelectorAll('select');
+		//var instances = M.FormSelect.init(elems, {dropdownOptions: this.state.resData});
+	
+
 	}
 
 	getAllReddit = () => {
@@ -164,13 +180,19 @@ class MainParent extends Component {
 	};
 
 	render() {
-		console.log(this.state.hide18Posts)
+		console.log(this.state.orderBy)
 		return (
-			<div>
-				<select onChange={this.handleSelectChange}>
+			<div className="container ">
+				<div className="row">
+					<div className="col s4 m4"/>
+				<div className="col s4 m4">
+				<select className="browser-default" onChange={this.handleSelectChange}>
 					<option value="r/all">r/all</option>
 					<SelectOptions subReddit={this.state.subReddit} />
 				</select>
+				</div>
+				<div className="col s4 m4"/>
+				</div>
 
 				<FilterOptions handleFilterOptionChange={this.handleFilterOptionChange} handleAscDescChange={this.handleAscDescChange} radio1Checked={this.state.radio1Checked} radio2Checked={this.state.radio2Checked} handleRadioButtonCheck={this.handleRadioButtonCheck} handle18PlusContent={this.handle18PlusContent} hide18Posts={this.state.hide18Posts}/>
 
@@ -178,6 +200,22 @@ class MainParent extends Component {
 					resData={this.state.resData}
 					timeConverter={this.timeConverter}
 				/>
+				
+				  <div class="row">
+    <div class="col s12 m6">
+      <div class="card blue-grey darken-1">
+        <div class="card-content white-text">
+          <span class="card-title">Card Title</span>
+          <p>I am a very simple card. I am good at containing small bits of information.
+          I am convenient because I require little markup to use effectively.</p>
+        </div>
+        <div class="card-action">
+          <a href="#">This is a link</a>
+          <a href="#">This is a link</a>
+        </div>
+      </div>
+    </div>
+  </div>
 					
 			</div>
 		);

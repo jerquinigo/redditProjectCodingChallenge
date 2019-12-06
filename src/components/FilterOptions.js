@@ -1,24 +1,63 @@
-import React from "react"
+import React from "react";
 
+const FilterOptions = ({
+	handleFilterOptionChange,
+	handleAscDescChange,
+	radio1Checked,
+	radio2Checked,
+	handle18PlusContent,
+	hide18Posts
+}) => {
+	return (
+		<div>
+            <div className="row">
+                <div className="col s2 m2"/>
+			<div className="input-field col s8 m8">
+				<select className="browser-default" onChange={handleFilterOptionChange}>
+					<option>Select Filter</option>
+					<option value="score">score</option>
+					<option value="num_comments">comments</option>
+					<option value="ups">ups</option>
+				</select>
+			</div>
+                <div className="col s2 m2"/>
+            </div>
 
-const FilterOptions = ({handleFilterOptionChange, handleAscDescChange, radio1Checked, radio2Checked, handle18PlusContent, hide18Posts}) => {
-    return(
-        <div>
-           <select onChange={handleFilterOptionChange}>
-               <option>Select Filter</option>
-               <option value="score">score</option>
-               <option value="num_comments">comments</option>
-               <option value="ups">ups</option>
-            </select> 
+			<label>
+				<input
+					className="browser-default"
+					onClick={handle18PlusContent}
+					value={hide18Posts}
+					type="checkbox"
+				/>
+				<span>hide 18 posts</span>
+			</label>
+			<br />
+			<label>
+				<input
+					className="browser-default"
+					onChange={handleAscDescChange}
+					type="radio"
+					name="group1"
+					checked={radio1Checked}
+					value="ascending"
+				/>
+				<span>ascending</span>
+			</label>
+			<br />
+			<label>
+				<input
+					className="browser-default"
+					onChange={handleAscDescChange}
+					type="radio"
+					name="group1"
+					checked={radio2Checked}
+					value="descending"
+				/>
+				<span>descending</span>
+			</label>
+		</div>
+	);
+};
 
-            <input onClick={handle18PlusContent} value={hide18Posts} type="checkbox" /> Hide 18+ Posts
-            <br />
-            <input onChange={handleAscDescChange} type="radio" name="group1" checked={radio1Checked} value="ascending"/> ascending
-            <br />
-            <input onChange={handleAscDescChange} type="radio" name="group1" checked={radio2Checked}  value="descending"/> desending
-        </div>
-    )
-}
-
-
-export default FilterOptions
+export default FilterOptions;
