@@ -1,0 +1,15 @@
+/* .display-override{
+    display: flex !important;
+    justify-content: center !important;
+    flex-direction: column !important;
+    text-align: start !important;
+} */
+
+.display-override{
+    display: flex !important;
+    flex-flow: row wrap !important;
+    justify-content: center !important;
+    align-content: center !important;
+    align-items: end !important;
+    flex-direction: column !important;
+}
