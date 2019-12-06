@@ -1,4 +1,5 @@
 import React from "react";
+import "./CSS/FilterOptions.css"
 
 const FilterOptions = ({
 	handleFilterOptionChange,
@@ -13,6 +14,7 @@ const FilterOptions = ({
             <div className="row">
                 <div className="col s2 m2"/>
 			<div className="input-field col s8 m8">
+                <span>Select Category To Filter By</span>
 				<select className="browser-default" onChange={handleFilterOptionChange}>
 					<option>Select Filter</option>
 					<option value="score">score</option>
@@ -22,7 +24,7 @@ const FilterOptions = ({
 			</div>
                 <div className="col s2 m2"/>
             </div>
-
+            <div className="checkbox-radio-filter-div">
 			<label>
 				<input
 					className="browser-default"
@@ -30,7 +32,7 @@ const FilterOptions = ({
 					value={hide18Posts}
 					type="checkbox"
 				/>
-				<span>hide 18 posts</span>
+				<span className="black-text">Hide 18+ Posts</span>
 			</label>
 			<br />
 			<label>
@@ -42,7 +44,7 @@ const FilterOptions = ({
 					checked={radio1Checked}
 					value="ascending"
 				/>
-				<span>ascending</span>
+				<span className="black-text">Ascending</span>
 			</label>
 			<br />
 			<label>
@@ -54,8 +56,9 @@ const FilterOptions = ({
 					checked={radio2Checked}
 					value="descending"
 				/>
-				<span>descending</span>
+				<span className="black-text">Descending</span>
 			</label>
+            </div>
 		</div>
 	);
 };

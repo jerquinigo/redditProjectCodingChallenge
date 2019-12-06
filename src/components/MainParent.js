@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import DisplayResults from "./DisplayResults.js";
 import SelectOptions from "./SelectOptions.js";
-import FilterOptions from "./FilterOptions.js"
+import FilterOptions from "./FilterOptions.js";
 import axios from "axios";
-import _ from 'lodash';
+import _ from "lodash";
 
 class MainParent extends Component {
 	constructor() {
@@ -22,22 +22,6 @@ class MainParent extends Component {
 
 	componentDidMount() {
 		this.getAllReddit();
-		// $(document).ready(function() {
-		// 	debugger
-		// 	$('select').formSelect();
-		// });
-		 //var elems = document.querySelectorAll('select');
-		 // var options = document.querySelectorAll('option');
-		// var radio = document.querySelectorAll('input')
-
-		// var instances = M.FormSelect.init(elems, options); 
-		// var elems = document.getElementsByTagName("select");
-		// var instances = M.select.init(elems);
-		//M.AutoInit()
-		//var elems = document.querySelectorAll('select');
-		//var instances = M.FormSelect.init(elems, {dropdownOptions: this.state.resData});
-	
-
 	}
 
 	getAllReddit = () => {
@@ -69,90 +53,82 @@ class MainParent extends Component {
 		});
 	};
 
-
-	handleAscDescChange = (e) => {
+	handleAscDescChange = e => {
 		this.setState({
 			orderBy: e.target.value,
 			radio1Checked: !this.state.radio1Checked,
 			radio2Checked: !this.state.radio2Checked
-		})
-	}
+		});
+	};
 
-	handle18PlusContent = async (e) => {
-		 await this.setState({
+	handle18PlusContent = async e => {
+		await this.setState({
 			hide18Posts: !this.state.hide18Posts
-		})
-		let filterPostLodash 
-		if(this.state.hide18Posts === false){
+		});
+		let filterPostLodash;
+		if (this.state.hide18Posts === false) {
 			filterPostLodash = await _.filter(this.state.resData, res => {
-				if(res.data.over_18 === true){
-					return res
-				}else{
-					return null
+				if (res.data.over_18 === true) {
+					return res;
+				} else {
+					return null;
 				}
-			})
-			let newArr
-			
-			 newArr = await filterPostLodash.map(el => {
+			});
+			let newArr;
+
+			newArr = await filterPostLodash.map(el => {
 				return el.data.subreddit_name_prefixed;
-			})
-	console.log(newArr, "newArr")
+			});
+			console.log(newArr, "newArr");
 			this.setState({
 				resData: filterPostLodash,
 				searchSubReddit: newArr
-			})
+			});
 		}
-	}
+	};
 
 	handleFilterOptionChange = async e => {
-		 await this.setState({
+		await this.setState({
 			filterOptions: e.target.value
-		})
+		});
 
-		const {filterOptions, orderBy, resData} = this.state
+		const { filterOptions, orderBy, resData } = this.state;
 
-		if(filterOptions === "score" && orderBy === "ascending"){
-			let scoreLodash = await _.sortBy(resData, res => res.data.score)
+		if (filterOptions === "score" && orderBy === "ascending") {
+			let scoreLodash = await _.sortBy(resData, res => res.data.score);
 			this.setState({
 				resData: scoreLodash
-			})
-		}
-		else if(filterOptions === "num_comments" && orderBy === "ascending"){
-			let scoreLodash = await _.sortBy(resData, res => res.data.num_comments)
+			});
+		} else if (filterOptions === "num_comments" && orderBy === "ascending") {
+			let commentsLodash = await _.sortBy(resData, res => res.data.num_comments);
+			this.setState({
+				resData: commentsLodash
+			});
+		} else if (filterOptions === "ups" && orderBy === "ascending") {
+			let upsLodash = await _.sortBy(resData, res => res.data.ups);
+			this.setState({
+				resData: upsLodash
+			});
+		} else if (filterOptions === "score" && orderBy === "descending") {
+			let scoreLodash = await _.orderBy(resData, res => res.data.ups).reverse();
 			this.setState({
 				resData: scoreLodash
-			})
-		}
-		else if(filterOptions === "ups" && orderBy === "ascending"){
-			let scoreLodash = await _.sortBy(resData, res => res.data.ups)
+			});
+		} else if (filterOptions === "num_comments" && orderBy === "descending") {
+			let commentsLodash = await _.orderBy(
+				resData,
+				res => res.data.num_comments
+			).reverse();
 			this.setState({
-				resData: scoreLodash
-			})
-		}
-		else if(filterOptions === "score" && orderBy === "descending"){
-			let scoreLodash = await _.orderBy(resData, res => res.data.ups).reverse()
+				resData: commentsLodash
+			});
+		} else if (filterOptions === "ups" && orderBy === "descending") {
+			let upsLodash = await _.orderBy(resData, res => res.data.ups).reverse();
 			this.setState({
-				resData: scoreLodash
-			})
+				resData: upsLodash
+			});
 		}
-
-		else if(filterOptions === "num_comments" && orderBy === "descending"){
-			let scoreLodash = await _.orderBy(resData, res => res.data.num_comments).reverse()
-			this.setState({
-				resData: scoreLodash
-			})
-		}
-
-		else if(filterOptions === "ups" && orderBy === "descending"){
-			let scoreLodash = await _.orderBy(resData, res => res.data.ups).reverse()
-			this.setState({
-				resData: scoreLodash
-			})
-		}
-	}
-
-
-
+	};
 
 	timeConverter = UNIX_timestamp => {
 		const a = new Date(UNIX_timestamp * 1000);
@@ -180,43 +156,36 @@ class MainParent extends Component {
 	};
 
 	render() {
-		console.log(this.state.orderBy)
 		return (
 			<div className="container ">
 				<div className="row">
-					<div className="col s4 m4"/>
-				<div className="col s4 m4">
-				<select className="browser-default" onChange={this.handleSelectChange}>
-					<option value="r/all">r/all</option>
-					<SelectOptions subReddit={this.state.subReddit} />
-				</select>
-				</div>
-				<div className="col s4 m4"/>
+					<div className="col s2 m2" />
+					<div className="col s8 m8">
+						<span>Select Subreddit</span>
+						<select
+							className="browser-default"
+							onChange={this.handleSelectChange}>
+							<option value="r/all">r/all</option>
+							<SelectOptions subReddit={this.state.subReddit} />
+						</select>
+					</div>
+					<div className="col s2 m2" />
 				</div>
 
-				<FilterOptions handleFilterOptionChange={this.handleFilterOptionChange} handleAscDescChange={this.handleAscDescChange} radio1Checked={this.state.radio1Checked} radio2Checked={this.state.radio2Checked} handleRadioButtonCheck={this.handleRadioButtonCheck} handle18PlusContent={this.handle18PlusContent} hide18Posts={this.state.hide18Posts}/>
+				<FilterOptions
+					handleFilterOptionChange={this.handleFilterOptionChange}
+					handleAscDescChange={this.handleAscDescChange}
+					radio1Checked={this.state.radio1Checked}
+					radio2Checked={this.state.radio2Checked}
+					handleRadioButtonCheck={this.handleRadioButtonCheck}
+					handle18PlusContent={this.handle18PlusContent}
+					hide18Posts={this.state.hide18Posts}
+				/>
 
 				<DisplayResults
 					resData={this.state.resData}
 					timeConverter={this.timeConverter}
 				/>
-				
-				  <div class="row">
-    <div class="col s12 m6">
-      <div class="card blue-grey darken-1">
-        <div class="card-content white-text">
-          <span class="card-title">Card Title</span>
-          <p>I am a very simple card. I am good at containing small bits of information.
-          I am convenient because I require little markup to use effectively.</p>
-        </div>
-        <div class="card-action">
-          <a href="#">This is a link</a>
-          <a href="#">This is a link</a>
-        </div>
-      </div>
-    </div>
-  </div>
-					
 			</div>
 		);
 	}
